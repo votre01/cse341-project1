@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/votre01/cse341-project1#readme",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "install": "^0.13.0"
+    "install": "^0.13.0",
+    "mongodb": "^6.5.0"
   }
 }
