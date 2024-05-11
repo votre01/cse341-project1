@@ -1,6 +1,7 @@
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
+/*
 const getAll = async (req, res) => {
   //#swagger.tags=['Contacts']
   const result = await mongodb.getDatabase().db().collection('contacts').find();
@@ -9,8 +10,25 @@ const getAll = async (req, res) => {
     res.status(200).json(users);
   })
 }
+*/
 
-const getSingle = async (req, res) => {
+const getAll = (req, res) => {
+  //#swagger.tags=['Contacts']
+  mongodb
+    .getDb()
+    .db()
+    .collection('contacts')
+    .find()
+    .toArray((err, lists) => {
+      if (err) {
+        res.status(400).json({ message: err });
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
+};
+
+/*const getSingle = async (req, res) => {
   //#swagger.tags=['Contacts']
   const contactId = new ObjectId(req.params.id);
   const result = await mongodb.getDatabase().db().collection('contacts').find({_id: contactId});
@@ -19,14 +37,36 @@ const getSingle = async (req, res) => {
     res.status(200).json(users)[0];
   })  
 }
+*/
+
+const getSingle = (req, res) => {
+  //#swagger.tags=['Contacts']
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('Must use a valid contact id to find a contact.');
+  }
+  const contactId = new ObjectId(req.params.id);
+  mongodb
+    .getDb()
+    .db()
+    .collection('contacts')
+    .find({ _id: contactId })
+    .toArray((err, result) => {
+      if (err) {
+        res.status(400).json({ message: err });
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(result[0]);
+    });
+};
 
 const createContact = async (req, res) => {
   //#swagger.tags=['Contacts']
   const contact = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
-    username: req.body.username,
-    name: req.body.name,
-    ipaddress: req.body.ipaddress,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday,
   };
   const response = await mongodb.getDatabase().db().collection('contacts').insertOne(contact);
   if (response.acknowledged > 0) {
@@ -40,10 +80,11 @@ const updateContact = async (req, res) => {
   //#swagger.tags=['Contacts']
   const userId = new ObjectId(req.params.id);
   const contact = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
-    username: req.body.username,
-    name: req.body.name,
-    ipaddress: req.body.ipaddress,
+    favoriteColor: req.body.favoriteColor,
+    birthday: req.body.birthday,
   };
   const response = await mongodb.getDatabase().db().collection('contacts').replaceOne(
   {_id: userId}, contact);

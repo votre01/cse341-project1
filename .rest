@@ -8,11 +8,12 @@ GET http://localhost:3000/contacts/650c5812c06bc031e32200a1
 POST http://localhost:3000/contacts HTTP/1.1
 content-type: application/json
 
-{
-  "email": "sbirch@test.com",
-  "username": "sbirch@test.com",
-  "name": "sarah",
-  "ipaddress": "143.121.08.15"
+{  
+  "firstName": "sarah",
+  "lastName": "birch",
+  "email": "sbirch@test",
+  "favoriteColor": "blue",
+  "birthday": 1990-12-21,
 }
 
 ### Update contact
@@ -20,10 +21,11 @@ PUT http://localhost:3000/contacts/6636b94dac2fea6a7157cedb HTTP/1.1
 content-type: application/json
 
 {
-  "email": "andrew@test.com",
-  "username": "andrew@test.com",
-  "name": "andrew",
-  "ipaddress": "143.121.08.15"
+  "firstName": "andrew",
+  "lastName": "matthews",
+  "email": "amatthews@test.email",
+  "favoriteColor": "purple",
+  "birthday": 1986-06-13,
 }
 
 ### Delete contact

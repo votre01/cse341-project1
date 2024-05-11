@@ -1,6 +1,7 @@
 const express = require('express');
 const mongodb = require('./data/database');
 const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
 require('dotenv').config();
 
 const app = express();
@@ -21,7 +22,11 @@ app.use((req, res, next) => {
 
 app.use('/', require('./routes'));
 
-const port = process.env.PORT || 3000;
+process.on('uncaughtException', (err, origin) => {
+  console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});
+
+
 
 
 mongodb.initDb((err) => {
