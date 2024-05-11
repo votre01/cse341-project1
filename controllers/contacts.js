@@ -1,20 +1,8 @@
 const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
-/*
-const getAll = async (req, res) => {
-  //#swagger.tags=['Contacts']
-  const result = await mongodb.getDatabase().db().collection('contacts').find();
-  result.toArray().then((contacts) => {
-    res.setHeader('Content-type', 'application/json');
-    res.status(200).json(contacts);
-  });
-};
-
-*/
-
-
 const getAll = (req, res) => {
+  //#swagger.tags=['Contacts']
   mongodb
     .getDatabase()
     .db()
@@ -31,19 +19,8 @@ const getAll = (req, res) => {
     });
 };
 
-
-/*const getSingle = async (req, res) => {
-  //#swagger.tags=['Contacts']
-  const contactId = new ObjectId(req.params.id);
-  const result = await mongodb.getDatabase().db().collection('contacts').find({_id: contactId});
-  result.toArray().then((contacts) => {
-    res.setHeader('Content-type', 'application/json');
-    res.status(200).json(contacts)[0];
-  })  
-}
-*/
-
 const getSingle = (req, res) => {
+  //#swagger.tags=['Contacts']
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to find a contact.');
   }
