@@ -13,7 +13,7 @@ content-type: application/json
   "lastName": "birch",
   "email": "sbirch@test",
   "favoriteColor": "blue",
-  "birthday": 1990-12-21,
+  "birthday": "1990-12-21",
 }
 
 ### Update contact

@@ -23,6 +23,7 @@
     "install": "^0.13.0",
     "mongodb": "^6.5.0",
     "swagger-autogen": "^2.23.7",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "validatorjs": "^3.22.1"
   }
 }
